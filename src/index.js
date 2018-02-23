@@ -1,23 +1,21 @@
 module.exports = function getZerosCount(number, base) {
-  function Ferma (n) { //method Ferma
-    var s = Math.ceil(Math.sqrt(n)),
-    y = 0,
-    x = 0;
-    for (let i = 1; i > 0; i++) {
-      y = Math.pow(s + i, 2) - n;
-      if (Math.sqrt(y) % 1 == 0) {
-        break;
+  function Factorise (base) {
+    var j = 1,
+    i = 2, // divider
+    a = []; //array of simple multiplier
+    do {
+     if (base % i == 0) { // base
+      a[j-1] = i;
+      j++;
+      base = base / i;
+     } else {
+      i++;
       };
-    };
-    x = Math.sqrt (n + y);
-    y = Math.sqrt(y);
-      return x + y;
-    };
-    if (base % 2 != 0) { //it work only for odd numbers
-      num = Ferma(base);
-    } else {
-      num = 5;
     }
+    while (i < base);
+    a[j-1] = i;
+    return Math.max(...a); //return max simple multiplier
+    };
   var n = [], //geometric progression of the base
   zeros = 0; //number of our zeros
   for (let i = 1; i > 0; i++) { /*fill our array with numbers obtained
@@ -27,7 +25,7 @@ module.exports = function getZerosCount(number, base) {
       n.splice(i-2, 1);
       break;
     };
-    n[i-1] = Math.pow(num, i);
+    n[i-1] = Math.pow(Factorise(base), i);
   };
   for (let i = 0; i < n.length; i++) {
     zeros += Math.floor (number / n[i]); //count our zeros
