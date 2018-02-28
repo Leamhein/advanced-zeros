@@ -2,6 +2,10 @@ module.exports = function getZerosCount(number, base) {
   function Factorise (base) {
     var j = 1,
     i = 2; // divider
+    if (base == i) {
+      a[0] = 2;
+      return a[0];
+    };
     do {
      if (base % i == 0) { // base
       a[j-1] = i;
@@ -10,9 +14,7 @@ module.exports = function getZerosCount(number, base) {
      } else {
       i++;
       };
-    }
-    while (i < base);
-    a[j-1] = i;
+    } while (i <= base);
     return Math.max(...a); //return max simple multiplier
     };
   var n = [], //geometric progression of the base
