@@ -1,8 +1,7 @@
 module.exports = function getZerosCount(number, base) {
   function Factorise (base) {
     var j = 1,
-    i = 2, // divider
-    a = []; //array of simple multiplier
+    i = 2; // divider
     do {
      if (base % i == 0) { // base
       a[j-1] = i;
@@ -17,7 +16,9 @@ module.exports = function getZerosCount(number, base) {
     return Math.max(...a); //return max simple multiplier
     };
   var n = [], //geometric progression of the base
-  zeros = 0; //number of our zeros
+  a = [], //array of simple multiplier
+  zeros = 0, //number of our zeros
+  count = 1; //maximum multiplier counter
   for (let i = 1; i > 0; i++) { /*fill our array with numbers obtained
                                 with geometric progression of the base.
                                 this numbers must be less then incoming number*/
@@ -30,5 +31,16 @@ module.exports = function getZerosCount(number, base) {
   for (let i = 0; i < n.length; i++) {
     zeros += Math.floor (number / n[i]); //count our zeros
   };
+  a = a.reverse();
+  if (a.length > 1) { //if there are several max. multipliers in the array
+    for (let i = 1; i < a.length; i++) {
+      if (a[0] == a[i]) {
+        count++; //counter +1
+      };
+    };
+  };
+  if (count > 1) {
+    return Math.floor(zeros/count);
+  }
   return zeros;
 };
